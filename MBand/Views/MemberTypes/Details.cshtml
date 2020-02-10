@@ -1,0 +1,26 @@
+﻿@model MBand.Models.MemberType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details about type</h2>
+
+<div>
+    @*<h4>MemberType</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", null ,new { id = Model.MemberTypeId }, new { @class = "btn btn-info" })  
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-light" })
+</p>

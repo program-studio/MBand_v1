@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MBand.Models.Band>
+
+@{
+    ViewBag.Title = "Bands information";
+}
+
+<h2>Bands information</h2>
+
+<p  >
+    @Html.ActionLink("Create New", "Create", null, new { @class="btn btn-success"} )
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BandImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFoundation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.BandImg != null)
+                    {
+                        @Html.Raw("<img class=round style='width:60px; height:60px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.BandImg) + "\" />")
+                        @*<img src="@Model.Pictue.Url">*@
+                    }
+                    @*@Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+            + Convert.ToBase64String(item.BandImg) + "\" />")*@
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Name)*@
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.Name).ToString(), "Details", null, new { id = item.BandId }, new { @class = "text-reset font-weight-bold" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearFoundation)
+                </td>
+
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.BandImg)
+                </td>*@
+
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", null, new { id = item.BandId }, new { @class = "btn btn-light" }) 
+                    @Html.ActionLink("Details", "Details", null, new { id = item.BandId }, new { @class = "btn btn-light"}) 
+                    @Html.ActionLink("Delete", "Delete", null, new { id = item.BandId }, new { @class = "btn btn-light" }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

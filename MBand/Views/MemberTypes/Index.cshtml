@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MBand.Models.MemberType>
+
+@{
+    ViewBag.Title = "Types information";
+}
+
+<h2>Types information</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+     </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Type)*@
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.Type).ToString(), "Details", null, new { id = item.MemberTypeId }, new { @class = "text-reset font-weight-bold" })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", null ,new { id = item.MemberTypeId }, new { @class = "btn btn-light" }) 
+                    @Html.ActionLink("Details", "Details", null, new { id = item.MemberTypeId }, new { @class = "btn btn-light" }) 
+                    @Html.ActionLink("Delete", "Delete", null, new { id = item.MemberTypeId }, new { @class = "btn btn-light" }) 
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>

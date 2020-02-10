@@ -1,0 +1,91 @@
+﻿@model MBand.Models.Band
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit information</h2>
+
+
+@using (Html.BeginForm("Edit", "Bands", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Band</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BandId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YearFoundation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearFoundation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YearFoundation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ImgPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImgPath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImgPath, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.BandImg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BandImg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BandImg, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BandImg, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.EditorFor(model => model.BandImg, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.BandImg, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                <input type="file" id="file" name="uploadImage" />
+            </div>
+
+            @if (Model.BandImg == null)
+                {
+                @*<div class="form-control-static">Нет картинки</div>*@
+            }
+            else
+            {
+                <div style="margin-left:20px; margin-top:10px">
+                    @Html.Raw("<img class=round style='width:60px; height:60px;' src=\"data:image/jpeg;base64,"
+                                + Convert.ToBase64String(Model.BandImg) + "\" />")
+                </div>
+            }
+        </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-light" })
+            
+        </div>
+    </div>
+    </div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-light" }) 
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
